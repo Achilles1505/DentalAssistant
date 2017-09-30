@@ -133,6 +133,7 @@ namespace DentalAssistant
             }
 
             treatmentCostTextBox.SelectionStart = treatmentCostTextBox.Text.Length;
+            //here
         }
 
         private void treatmentCostTextBox_Click(object sender, EventArgs e)
