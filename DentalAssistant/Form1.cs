@@ -21,6 +21,22 @@ namespace DentalAssistant
 
         MySqlConnection conn = new MySqlConnection("Server = dentalassistantdbinstance.chgcnjcdjlrn.ap-south-1.rds.amazonaws.com; Port = 3306; Database = Patients; Uid = admin001; Pwd = ayodhyadental;");
 
+        private void RefreshGrid()
+        {
+            MySqlCommand command = conn.CreateCommand();
+
+            command.CommandText = "SELECT patient_id as `Patient ID`, patient_name as `Patient Name`, age as `Age`, sex as `Sex` FROM patient_records";
+
+            MySqlDataReader reader = command.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+
+                dataGridView1.DataSource = dt;
+            }
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
             
@@ -36,7 +52,7 @@ namespace DentalAssistant
                 MessageBox.Show("Could not open connection." + ex);
             }
 
-            
+            RefreshGrid();
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
@@ -133,9 +149,6 @@ namespace DentalAssistant
             }
 
             treatmentCostTextBox.SelectionStart = treatmentCostTextBox.Text.Length;
-            //here
-
-            this is NotFiniteNumberException the endaks jsfafnais
         }
 
         private void treatmentCostTextBox_Click(object sender, EventArgs e)
